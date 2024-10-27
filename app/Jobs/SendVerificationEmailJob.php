@@ -15,12 +15,16 @@ class SendVerificationEmailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    public $tries = 3;
+
+    public $backoff = [60, 60 * 10, 60 * 60];
+
     /**
      * Create a new job instance.
      */
     public function __construct(public User $user)
     {
-        //
+        $this->onQueue('sending-notification');
     }
 
     /**

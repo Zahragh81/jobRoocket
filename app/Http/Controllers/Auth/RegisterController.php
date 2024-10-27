@@ -22,7 +22,7 @@ class RegisterController extends Controller
             'password' => '123456789'
         ];
 
-        $user = \App\Models\User::create($validatedData);
+        $user = \App\Models\User::whereEmail('zahra@gmail.com')->first();
 
         SendVerificationEmailJob::dispatch($user);
 
