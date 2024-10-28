@@ -21,7 +21,7 @@ class SendWebhook implements ShouldQueue
     //در اینجا گفته باز 60ثانیه دیگر
     public $backoff = [60, 600, 3600];
 
-    public $maxExceptions = 10;
+//    public $maxExceptions = 10;
 
     public function retryUntil()
     {
@@ -43,7 +43,7 @@ class SendWebhook implements ShouldQueue
     {
         $response = Http::post($this->url,  $this->data);
 
-        throw new RuntimeException('database disconnected');
+//        throw new RuntimeException('database disconnected');
 
         if ($response->failed()){
             $this->release(
