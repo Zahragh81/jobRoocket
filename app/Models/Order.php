@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
-// * @property OrderStatus $status
-// * @property Carbon $created_at
+ * @property OrderStatus $status
+ * @property Carbon $created_at
 */
 
 class Order extends Model
