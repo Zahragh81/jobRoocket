@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CompainController;
 use App\Http\Controllers\UploadVideoController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,3 +20,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('register', [RegisterController::class, 'register']);
 Route::get('checkout', [CheckoutController::class, 'checkout']);
 Route::get('/upload/video', [UploadVideoController::class, 'upload']);
+Route::get('/sendCampaign', [CompainController::class, 'sendCampaign']);
