@@ -8,34 +8,18 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Channels\SmsChannel;
 
-class YaldaPromotionNotification extends Notification implements ShouldQueue
+class YaldaPromotionNotification extends Notification
 {
     use Queueable;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct(public $channel)
     {
 
     }
 
-
-    public function withDelay(object $notifiable): array
-    {
-        return [
-          'mail' => now()->addMinutes(5),
-          SmsChannel::class => now()->addMinutes(10)
-        ];
-    }
-
-
-    public function viaQueues()
-    {
-        return [
-         SmsChannel::class => 'promotion-germany'
-        ];
-    }
 
     /**
      * Get the notification's delivery channels.
@@ -44,7 +28,12 @@ class YaldaPromotionNotification extends Notification implements ShouldQueue
      */
     public function via(object $notifiable): array
     {
-        return ['mail', SmsChannel::class];
+        if ($this->channel === 'mail')
+            return ['mail'];
+        elseif ($this->channel === SmsChannel::class)
+            return [SmsChannel::class];
+
+        return [];
     }
 
     /**

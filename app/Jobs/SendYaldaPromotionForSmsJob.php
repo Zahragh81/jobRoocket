@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Channels\SmsChannel;
 use App\Models\User;
 use App\Notifications\YaldaPromotionNotification;
 use Illuminate\Bus\Queueable;
@@ -27,6 +28,6 @@ class SendYaldaPromotionForSmsJob implements ShouldQueue
      */
     public function handle(): void
     {
-        $this->user->notify();
+        $this->user->notify(new YaldaPromotionNotification(SmsChannel::class));
     }
 }

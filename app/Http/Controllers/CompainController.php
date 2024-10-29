@@ -15,13 +15,13 @@ class CompainController extends Controller
     {
         $users = User::all();
 
-
         foreach ($users->chunk(20) as $key => $usersGroup){
             foreach ($usersGroup as $user){
                 SendYaldaPromotionForMailJob::dispatch($user);
                 SendYaldaPromotionForSmsJob::dispatch($user)->onQueue('promotion-sms');
-//                $user->notify((new YaldaPromotionNotification($key)));
             }
         }
+
+
     }
 }
